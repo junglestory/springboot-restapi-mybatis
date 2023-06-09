@@ -140,4 +140,32 @@ public class BoardService {
 		 
 		 return resultMap;
 	}
+	
+	/**
+	 * 게시판 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	public Map<String, Object> deleteBoard(int boardNo) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+       		    
+		try {
+			int ret = boardMapper.deleteBoard(boardNo);
+			
+			if (ret > 0) {
+	   			resultMap.put("result", "success");
+	   		} else {
+	   			resultMap.put("result", "failed");
+	   		}
+	       
+			resultMap.put("status", HttpStatus.NO_CONTENT);
+		} catch (Exception ex) {
+			resultMap.put("status", HttpStatus.BAD_REQUEST);
+			resultMap.put("message", "failed");
+			
+			logger.error(ex.getMessage());			
+		}
+		
+		return resultMap;
+	}
 }

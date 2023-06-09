@@ -3,6 +3,7 @@ package example.restapi.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,5 +60,16 @@ public class BoardController {
 	 @PutMapping(value = "/board", produces = "application/json")
 	 public Map<String, Object> modifyBoard(@RequestBody Board baord) throws Exception {
 		 return boardService.modifyBoard(baord);
+	 }
+	 
+	 /**
+	  * 게시판 삭제 
+	  * @param boardNo
+	  * @return
+	  * @throws Exception
+	  */
+	 @DeleteMapping(value = "/board/{boardNo}", produces = "application/json")
+	 public Map<String, Object> deleteBoard(@PathVariable("boardNo") int boardNo) throws Exception {
+		 return boardService.deleteBoard(boardNo);
 	 }
 }
