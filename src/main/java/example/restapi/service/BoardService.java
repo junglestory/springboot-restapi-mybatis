@@ -20,7 +20,58 @@ public class BoardService {
 
     @Autowired
     BoardMapper boardMapper;
-
+	/**
+	 * 게시판 목록
+	 * @return
+	 */
+	public Map<String, Object> getBoardList() {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		try {			
+			List<Board> result = boardMapper.selectBoardList();
+			if (result.size() > 0) {
+				resultMap.put("message", "success");
+	        } else {
+	        	resultMap.put("message", "failed");
+	        }
+			resultMap.put("status", HttpStatus.OK);
+			resultMap.put("result", result);	
+		} catch (Exception ex) {
+			resultMap.put("status", HttpStatus.BAD_REQUEST);
+			resultMap.put("message", "failed");
+			logger.error(ex.getMessage());
+		}
+        return resultMap; 
+    }
+		
+	/**
+	 * 게시판 조회
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String, Object> getBoard(int boardNo) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		try {			
+			Board result = boardMapper.selectBoard(boardNo);
+			
+			if (result != null) {
+				resultMap.put("message", "success");
+	        } else {
+	        	resultMap.put("message", "failed");
+	        }
+			
+			resultMap.put("status", HttpStatus.OK);
+			resultMap.put("result", result);
+		} catch (Exception ex) {
+			resultMap.put("status", HttpStatus.BAD_REQUEST);
+			resultMap.put("message", "failed");
+			
+			logger.error(ex.getMessage());
+		}
+		
+        return resultMap;
+    }
+	
 	/**
 	 * 게시판 등록
 	 * @param board
