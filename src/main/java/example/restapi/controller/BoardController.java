@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,5 +48,16 @@ public class BoardController {
 	 @PostMapping(value = "/board", produces = "application/json")
 	 public Map<String, Object> registBoard(@RequestBody Board board) throws Exception {
 	      return boardService.registBoard(board);
+	 }
+	 
+	 /**
+	  * 게시판 수정 
+	  * @param baord
+	  * @return
+	  * @throws Exception
+	  */
+	 @PutMapping(value = "/board", produces = "application/json")
+	 public Map<String, Object> modifyBoard(@RequestBody Board baord) throws Exception {
+		 return boardService.modifyBoard(baord);
 	 }
 }

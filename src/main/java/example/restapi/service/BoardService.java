@@ -105,4 +105,39 @@ public class BoardService {
 		 
 		 return resultMap;
    }
+	
+	/**
+	 * 게시판 수정 
+	 * @param board
+	 * @return
+	 */
+	public Map<String, Object> modifyBoard(Board board) {
+		 Map<String, Object> resultMap = new HashMap<String, Object>();
+		 Map<String, Object> paramMap = new HashMap<String, Object>();
+        
+		 try {
+			paramMap.put("boardNo", board.getBoardNo());
+	        paramMap.put("title", board.getTitle());
+	        paramMap.put("contents", board.getContents());
+	        paramMap.put("writer", board.getWriter());
+	        paramMap.put("viewCount", board.getViewCount());
+	                 
+	        int ret = boardMapper.updateBoard(paramMap);
+	        
+	        if (ret > 0) {
+	        	resultMap.put("result", "success");
+	        } else {
+	        	resultMap.put("result", "failed");
+	        }
+	        
+	        resultMap.put("status", HttpStatus.OK);
+		 } catch (Exception ex) {
+			resultMap.put("status", HttpStatus.BAD_REQUEST);
+			resultMap.put("message", "failed");
+			
+			logger.error(ex.getMessage());			
+		 }
+		 
+		 return resultMap;
+	}
 }
