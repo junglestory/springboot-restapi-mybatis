@@ -1,6 +1,7 @@
+# Springboot resapi mybatis
 This application is a Springboot Rest API with Mariadb, Mybatis.
 
-> Requirements
+## Requirements
 - [JDK](https://www.oracle.com/in/java/technologies/downloads/) 1.8+ 설치
 - [STS](https://spring.io/tools) 설치
 - [Postman](https://www.postman.com/downloads/) 설치
